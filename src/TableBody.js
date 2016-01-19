@@ -78,6 +78,7 @@ class TableBody extends React.Component{
             return(
               <TableColumn dataAlign={column.align}
                            key={i}
+                           hidden={column.hidden}
                            className={tdClassName}
                            cellEdit={this.props.cellEdit}
                            onEdit={this.handleEditCell.bind(this)}
@@ -126,11 +127,11 @@ class TableBody extends React.Component{
         </td>
       </TableRow>);
     }
-
+    
     this.editing = false;
-
+    
     var height = this.calculateContainerHeight().toString();
-
+    
     return(
       <div ref="container" className={containerClasses} style={{height: height}}>
         <table ref="body" className={tableClasses}>
