@@ -115,6 +115,7 @@ class BootstrapTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    
     this.initTable(nextProps);
     if (Array.isArray(nextProps.data)) {
       this.store.setData(nextProps.data);
@@ -128,9 +129,7 @@ class BootstrapTable extends React.Component {
       let sortOrder = nextProps.options.sortOrder || (sortInfo ? sortInfo.order : undefined);
       if(sortField && sortOrder) this.store.sort(sortOrder, sortField);
       let data = this.store.page(page, sizePerPage).get();
-      this.setState({
-        data: data
-      });
+      
     }
     if (nextProps.selectRow && nextProps.selectRow.selected) {
       //set default select rows to store.
@@ -153,6 +152,8 @@ class BootstrapTable extends React.Component {
   }
 
   componentDidUpdate() {
+      console.log("Component updated" );
+      console.log(this.state.data);
     this._adjustHeaderWidth();
     this._attachCellEditFunc();
     if (this.props.options.afterTableComplete)

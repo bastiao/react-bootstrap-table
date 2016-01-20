@@ -35,9 +35,11 @@ TableRow.propTypes = {
   isSelected: React.PropTypes.bool,
   enableCellEdit: React.PropTypes.bool,
   onRowClick: React.PropTypes.func,
-  onSelectRow: React.PropTypes.func
+  onSelectRow: React.PropTypes.func,
+  key: React.PropTypes.string
 };
 TableRow.defaultProps = {
-  onRowClick: undefined
+  onRowClick: undefined,
+  key: undefined
 }
 export default TableRow;

@@ -26,6 +26,8 @@ class TableBody extends React.Component{
 
   componentDidUpdate(){
     this.adjustBody();
+    
+    
   }
 
   render(){
@@ -40,7 +42,7 @@ class TableBody extends React.Component{
 
     var isSelectRowDefined = this._isSelectRowDefined();
     var tableHeader = this.renderTableHeader(isSelectRowDefined);
-
+    console.log(this.props.data);
     var tableRows = this.props.data.map(function(data, r){
       var tableColumns = this.props.columns.map(function(column, i){
         var fieldValue = data[column.name];
@@ -77,7 +79,8 @@ class TableBody extends React.Component{
             }
             return(
               <TableColumn dataAlign={column.align}
-                           key={i}
+                           key={fieldValue}
+                           hidden={column.hidden}
                            className={tdClassName}
                            cellEdit={this.props.cellEdit}
                            onEdit={this.handleEditCell.bind(this)}
@@ -105,6 +108,7 @@ class TableBody extends React.Component{
                               this.renderSelectRowColumn(selected):null;
       //add by bluespring for className customize
       var trClassName=isFun(this.props.trClassName)?this.props.trClassName(data,r):this.props.trClassName;
+      
       return (
         <TableRow isSelected={selected} key={r} className={trClassName}
           selectRow={isSelectRowDefined?this.props.selectRow:undefined}
@@ -130,7 +134,7 @@ class TableBody extends React.Component{
     this.editing = false;
 
     var height = this.calculateContainerHeight().toString();
-
+    
     return(
       <div ref="container" className={containerClasses} style={{height: height}}>
         <table ref="body" className={tableClasses}>
