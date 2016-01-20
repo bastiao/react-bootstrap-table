@@ -42,7 +42,6 @@ class TableBody extends React.Component{
 
     var isSelectRowDefined = this._isSelectRowDefined();
     var tableHeader = this.renderTableHeader(isSelectRowDefined);
-    console.log(this.props.data);
     var tableRows = this.props.data.map(function(data, r){
       var tableColumns = this.props.columns.map(function(column, i){
         var fieldValue = data[column.name];

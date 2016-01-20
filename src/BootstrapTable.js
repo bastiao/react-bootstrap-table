@@ -152,8 +152,6 @@ class BootstrapTable extends React.Component {
   }
 
   componentDidUpdate() {
-      console.log("Component updated" );
-      console.log(this.state.data);
     this._adjustHeaderWidth();
     this._attachCellEditFunc();
     if (this.props.options.afterTableComplete)
