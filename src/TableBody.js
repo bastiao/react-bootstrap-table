@@ -55,13 +55,13 @@ class TableBody extends React.Component{
             var format=column.format?function(value){
               return column.format(value,data).replace(/<.*?>/g,'');
             }:false;
-
+          
           return(
               <TableEditColumn completeEdit={this.handleCompleteEditCell.bind(this)}
                                //add by bluespring for column editor customize
                                editable={isFun(column.editable)?column.editable(fieldValue,data,r,i):column.editable}
                                format={column.format?format:false}
-                               key={i}
+                               key={data[this.props.keyField]}
                                blurToSave={this.props.cellEdit.blurToSave}
                                rowIndex={r}
                                colIndex={i}>
@@ -77,9 +77,10 @@ class TableBody extends React.Component{
             if (!React.isValidElement(formattedValue)) {
               formattedValue = <div dangerouslySetInnerHTML={{__html: formattedValue}}></div>;
             }
+            let myID = data[this.props.keyField] + "_" + i + "_" + r ;
             return(
               <TableColumn dataAlign={column.align}
-                           key={fieldValue}
+                           key={myID}
                            hidden={column.hidden}
                            className={tdClassName}
                            cellEdit={this.props.cellEdit}
@@ -89,9 +90,11 @@ class TableBody extends React.Component{
               </TableColumn>
             )
           } else{
+            
+            let myID = data[this.props.keyField] + "_" + i + "_" + r ;
             return(
               <TableColumn dataAlign={column.align}
-                           key={i}
+                           key={myID}
                            className={tdClassName}
                            cellEdit={this.props.cellEdit}
                            hidden={column.hidden}
@@ -110,7 +113,7 @@ class TableBody extends React.Component{
       var trClassName=isFun(this.props.trClassName)?this.props.trClassName(data,r):this.props.trClassName;
       
       return (
-        <TableRow isSelected={selected} key={r} className={trClassName}
+        <TableRow isSelected={selected} key={data[this.props.keyField]} className={trClassName}
           selectRow={isSelectRowDefined?this.props.selectRow:undefined}
           enableCellEdit={this.props.cellEdit.mode !== Const.CELL_EDIT_NONE}
           onRowClick={this.handleRowClick.bind(this)}
